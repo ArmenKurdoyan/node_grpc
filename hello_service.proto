@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package node.grpc;
+
+// message Test {
+//     repeated int32 a = 1; // an array of 32 bit integers
+//     string b = 2; // string
+// }
+
+message AuthRequest {
+    string username = 1;
+    string password = 2;
+    int32 age = 3;
+}
+// message ErrorMessage {
+//     int32 status = 1;
+//     string message = 2;
+// }
+message AuthResponse {
+    string basicAuth = 1;
+}
+
+message MovieRequest {
+    float lowerRating = 1;
+    float highRating = 2;
+}
+
+message Movie {
+    string name = 1;
+    string url = 2;
+}
+
+message MovieResponse {
+    repeated Movie movies = 1;
+}
+
+service BasicAuthGen {
+    rpc BasicAuth(AuthRequest) returns (AuthResponse);
+    rpc MovieFinder(MovieRequest) returns (MovieResponse);
+}
